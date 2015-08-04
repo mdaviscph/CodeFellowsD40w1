@@ -10,7 +10,7 @@ import Foundation
 
 struct Tweet {
   let text: String
-  let id: UInt
+  let id: String
   let user: User?
 }
 
