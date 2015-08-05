@@ -18,6 +18,11 @@
 		0009307C1B706C1100265D05 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0009307B1B706C1100265D05 /* User.swift */; };
 		0009307E1B70722800265D05 /* StoryboardConsts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0009307D1B70722800265D05 /* StoryboardConsts.swift */; };
 		000930801B70769A00265D05 /* TweetJSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0009307F1B70769A00265D05 /* TweetJSONParser.swift */; };
+		005CE4ED1B7199FF00A08C5F /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005CE4EC1B7199FF00A08C5F /* LoginService.swift */; };
+		005CE4EF1B719F7B00A08C5F /* ErrorMessageConsts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005CE4EE1B719F7B00A08C5F /* ErrorMessageConsts.swift */; };
+		005CE4F11B71A4B500A08C5F /* TweetJSONFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005CE4F01B71A4B500A08C5F /* TweetJSONFile.swift */; };
+		005CE4F31B71A8F700A08C5F /* TwitterJSONRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005CE4F21B71A8F700A08C5F /* TwitterJSONRequest.swift */; };
+		005CE4F51B72672900A08C5F /* TwitterURLConsts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005CE4F41B72672900A08C5F /* TwitterURLConsts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +51,11 @@
 		0009307B1B706C1100265D05 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0009307D1B70722800265D05 /* StoryboardConsts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardConsts.swift; sourceTree = "<group>"; };
 		0009307F1B70769A00265D05 /* TweetJSONParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetJSONParser.swift; sourceTree = "<group>"; };
+		005CE4EC1B7199FF00A08C5F /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		005CE4EE1B719F7B00A08C5F /* ErrorMessageConsts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessageConsts.swift; sourceTree = "<group>"; };
+		005CE4F01B71A4B500A08C5F /* TweetJSONFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetJSONFile.swift; sourceTree = "<group>"; };
+		005CE4F21B71A8F700A08C5F /* TwitterJSONRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterJSONRequest.swift; sourceTree = "<group>"; };
+		005CE4F41B72672900A08C5F /* TwitterURLConsts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterURLConsts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +108,8 @@
 		0009304E1B6FD50500265D05 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				005CE4EE1B719F7B00A08C5F /* ErrorMessageConsts.swift */,
+				005CE4F41B72672900A08C5F /* TwitterURLConsts.swift */,
 				000930791B706BB100265D05 /* tweet.json */,
 				000930501B6FD50500265D05 /* AppDelegate.swift */,
 				000930591B6FD50500265D05 /* LaunchScreen.xib */,
@@ -138,6 +150,9 @@
 				000930731B6FD63100265D05 /* Tweet.swift */,
 				0009307B1B706C1100265D05 /* User.swift */,
 				0009307F1B70769A00265D05 /* TweetJSONParser.swift */,
+				005CE4F01B71A4B500A08C5F /* TweetJSONFile.swift */,
+				005CE4EC1B7199FF00A08C5F /* LoginService.swift */,
+				005CE4F21B71A8F700A08C5F /* TwitterJSONRequest.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -252,12 +267,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				005CE4F51B72672900A08C5F /* TwitterURLConsts.swift in Sources */,
 				0009307C1B706C1100265D05 /* User.swift in Sources */,
 				000930741B6FD63100265D05 /* Tweet.swift in Sources */,
 				000930801B70769A00265D05 /* TweetJSONParser.swift in Sources */,
 				000930531B6FD50500265D05 /* TweetViewController.swift in Sources */,
+				005CE4F11B71A4B500A08C5F /* TweetJSONFile.swift in Sources */,
+				005CE4F31B71A8F700A08C5F /* TwitterJSONRequest.swift in Sources */,
+				005CE4EF1B719F7B00A08C5F /* ErrorMessageConsts.swift in Sources */,
 				000930511B6FD50500265D05 /* AppDelegate.swift in Sources */,
 				0009307E1B70722800265D05 /* StoryboardConsts.swift in Sources */,
+				005CE4ED1B7199FF00A08C5F /* LoginService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

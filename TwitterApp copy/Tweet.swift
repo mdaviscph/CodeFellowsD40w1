@@ -16,6 +16,6 @@ struct Tweet {
 
 struct TweetJSONKeys {
   static let text = "text"
-  static let id = "id"
+  static let id = "id_str"
   static let user = "user"
 }

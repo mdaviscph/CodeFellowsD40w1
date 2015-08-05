@@ -10,4 +10,4 @@ func reverseArray(array: [Int]) -> [Int] {
   }
   return result
 }
-reversedArray(array)
+reverseArray(array)

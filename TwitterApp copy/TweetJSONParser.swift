@@ -10,10 +10,10 @@ import Foundation
 
 class TweetJSONParser {
 
-  class func parseJSONBundleFile(fileName: String, fileType: String) -> [Tweet]? {
+  class func parseJSONData(jsonData: NSData) -> [Tweet]? {
     var tweets = [Tweet]()
     var error: NSError?
-    if let filePath = NSBundle.mainBundle().pathForResource(fileName, ofType: fileType), jsonData = NSData(contentsOfFile: filePath), rootObject = NSJSONSerialization.JSONObjectWithData(jsonData, options: nil, error: &error) as? [[String:AnyObject]] {
+    if let rootObject = NSJSONSerialization.JSONObjectWithData(jsonData, options: nil, error: &error) as? [[String:AnyObject]] {
       for tweetDictionary in rootObject {
         if let text = tweetDictionary[TweetJSONKeys.text] as? String, id = tweetDictionary[TweetJSONKeys.id] as? String, userDictionary = tweetDictionary[TweetJSONKeys.user] as? [String:AnyObject], name = userDictionary[UserJSONKeys.name] as? String, profileImageURL = userDictionary[UserJSONKeys.profileImageURL] as? String {
           let user = User(name: name, profileImageURL: profileImageURL)

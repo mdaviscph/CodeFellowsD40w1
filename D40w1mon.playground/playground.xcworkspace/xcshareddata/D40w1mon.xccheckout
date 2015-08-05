@@ -7,18 +7,18 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>7D2D3513-B409-4876-9CC6-4CE08FF55039</string>
 	<key>IDESourceControlProjectName</key>
-	<string>D40w1mon</string>
+	<string>playground</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>47B4CE994E6F1F0D5E14F2A711E991E8C6F73630</key>
 		<string>https://github.com/mdaviscph/CodeFellowsD40w1.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>D40w1mon.playground</string>
+	<string>D40w1mon.playground/playground.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>47B4CE994E6F1F0D5E14F2A711E991E8C6F73630</key>
-		<string>..</string>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/mdaviscph/CodeFellowsD40w1.git</string>

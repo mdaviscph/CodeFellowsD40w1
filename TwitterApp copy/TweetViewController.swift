@@ -10,18 +10,38 @@ import UIKit
 
 class TweetViewController: UIViewController {
 
-  var tweets = [[Tweet]]()
+  var tweets = [[Tweet]]() {
+    didSet {
+      tableView.reloadData()
+    }
+  }
   
   @IBOutlet weak var tableView: UITableView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    if let latestTweets = TweetJSONParser.parseJSONBundleFile("tweet", fileType: "json") {
-      tweets.insert(latestTweets, atIndex: 0)
+    //if let jsonData = TweetJSONFile.loadJSONFileInBundle("tweet", fileType: "json"),
+    //    latestTweets = TweetJSONParser.parseJSONData(jsonData) {
+    //  tweets.insert(latestTweets, atIndex: 0)
+    //}
+    
+    LoginService.loginForTwitter { (errorMessage, account) -> Void in
+      if let errorMessage = errorMessage {
+        println(errorMessage)
+      } else {
+        if let account = account {
+          TwitterJSONRequest.tweetsFromHomeTimeline(account) { (errorMessage, latestTweets) -> Void in
+            if let latestTweets = latestTweets {
+              NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
+                self.tweets.insert(latestTweets, atIndex: 0)
+              }
+            }
+          }
+        }
+      }
     }
   }
-
 }
 
 extension TweetViewController: UITableViewDataSource, UITableViewDelegate {
