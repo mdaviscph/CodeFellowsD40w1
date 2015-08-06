@@ -10,4 +10,5 @@ import Foundation
 
 struct StoryboardConsts {
   static let TweetTableViewCellReuseIdentifier = "TweetCell"
+  static let TweetDetailSegueIdentifier = "ShowTweetDetail"
 }

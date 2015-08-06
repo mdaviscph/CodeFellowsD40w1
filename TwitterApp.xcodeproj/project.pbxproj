@@ -25,6 +25,7 @@
 		005CE4F51B72672900A08C5F /* TwitterURLConsts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005CE4F41B72672900A08C5F /* TwitterURLConsts.swift */; };
 		00DE15FB1B73C00500F5943E /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DE15FA1B73C00500F5943E /* TweetTableViewCell.swift */; };
 		00DE15FD1B73CD0D00F5943E /* blank-headshot.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 00DE15FC1B73CD0D00F5943E /* blank-headshot.jpg */; };
+		00DE15FF1B73D6A100F5943E /* TweetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DE15FE1B73D6A100F5943E /* TweetDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		005CE4F41B72672900A08C5F /* TwitterURLConsts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterURLConsts.swift; sourceTree = "<group>"; };
 		00DE15FA1B73C00500F5943E /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
 		00DE15FC1B73CD0D00F5943E /* blank-headshot.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "blank-headshot.jpg"; sourceTree = "<group>"; };
+		00DE15FE1B73D6A100F5943E /* TweetDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				000930521B6FD50500265D05 /* TweetViewController.swift */,
+				00DE15FE1B73D6A100F5943E /* TweetDetailViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				005CE4EF1B719F7B00A08C5F /* ErrorMessageConsts.swift in Sources */,
 				000930511B6FD50500265D05 /* AppDelegate.swift in Sources */,
 				0009307E1B70722800265D05 /* StoryboardConsts.swift in Sources */,
+				00DE15FF1B73D6A100F5943E /* TweetDetailViewController.swift in Sources */,
 				005CE4ED1B7199FF00A08C5F /* LoginService.swift in Sources */,
 				00DE15FB1B73C00500F5943E /* TweetTableViewCell.swift in Sources */,
 			);

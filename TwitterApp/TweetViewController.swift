@@ -16,7 +16,12 @@ class TweetViewController: UIViewController {
     }
   }
   
-  @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var tableView: UITableView! {
+    didSet {
+      tableView.estimatedRowHeight = tableView.rowHeight
+      tableView.rowHeight = UITableViewAutomaticDimension
+    }
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -40,6 +45,12 @@ class TweetViewController: UIViewController {
           }
         }
       }
+    }
+  }
+  
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == StoryboardConsts.TweetDetailSegueIdentifier, let detailVC = segue.destinationViewController as? TweetDetailViewController, indexPath = tableView.indexPathForSelectedRow() {
+      detailVC.tweet = tweets[indexPath.section][indexPath.row]
     }
   }
 }
