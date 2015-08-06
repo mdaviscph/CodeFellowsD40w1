@@ -52,11 +52,8 @@ extension TweetViewController: UITableViewDataSource, UITableViewDelegate {
     return tweets[section].count
   }
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    if let cell = tableView.dequeueReusableCellWithIdentifier(StoryboardConsts.TweetTableViewCellReuseIdentifier, forIndexPath: indexPath) as? UITableViewCell {
-      cell.textLabel?.text = tweets[indexPath.section][indexPath.row].text
-      cell.detailTextLabel?.text = tweets[indexPath.section][indexPath.row].user?.name
-      return cell
-    }
-  return UITableViewCell()
+    let cell = tableView.dequeueReusableCellWithIdentifier(StoryboardConsts.TweetTableViewCellReuseIdentifier, forIndexPath: indexPath) as! TweetTableViewCell
+    cell.tweet = tweets[indexPath.section][indexPath.row]
+    return cell
   }
 }

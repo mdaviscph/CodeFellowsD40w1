@@ -10,12 +10,14 @@ import Foundation
 
 struct Tweet {
   let text: String
+  let createdAt: String
   let id: String
   let user: User?
 }
 
 struct TweetJSONKeys {
   static let text = "text"
+  static let createdAt = "created_at"
   static let id = "id_str"
   static let user = "user"
 }

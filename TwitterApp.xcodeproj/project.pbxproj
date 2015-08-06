@@ -23,6 +23,8 @@
 		005CE4F11B71A4B500A08C5F /* TweetJSONFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005CE4F01B71A4B500A08C5F /* TweetJSONFile.swift */; };
 		005CE4F31B71A8F700A08C5F /* TwitterJSONRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005CE4F21B71A8F700A08C5F /* TwitterJSONRequest.swift */; };
 		005CE4F51B72672900A08C5F /* TwitterURLConsts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005CE4F41B72672900A08C5F /* TwitterURLConsts.swift */; };
+		00DE15FB1B73C00500F5943E /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DE15FA1B73C00500F5943E /* TweetTableViewCell.swift */; };
+		00DE15FD1B73CD0D00F5943E /* blank-headshot.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 00DE15FC1B73CD0D00F5943E /* blank-headshot.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		005CE4F01B71A4B500A08C5F /* TweetJSONFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetJSONFile.swift; sourceTree = "<group>"; };
 		005CE4F21B71A8F700A08C5F /* TwitterJSONRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterJSONRequest.swift; sourceTree = "<group>"; };
 		005CE4F41B72672900A08C5F /* TwitterURLConsts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterURLConsts.swift; sourceTree = "<group>"; };
+		00DE15FA1B73C00500F5943E /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
+		00DE15FC1B73CD0D00F5943E /* blank-headshot.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "blank-headshot.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +114,7 @@
 			children = (
 				005CE4EE1B719F7B00A08C5F /* ErrorMessageConsts.swift */,
 				005CE4F41B72672900A08C5F /* TwitterURLConsts.swift */,
+				00DE15FC1B73CD0D00F5943E /* blank-headshot.jpg */,
 				000930791B706BB100265D05 /* tweet.json */,
 				000930501B6FD50500265D05 /* AppDelegate.swift */,
 				000930591B6FD50500265D05 /* LaunchScreen.xib */,
@@ -162,6 +167,7 @@
 			children = (
 				000930541B6FD50500265D05 /* Main.storyboard */,
 				0009307D1B70722800265D05 /* StoryboardConsts.swift */,
+				00DE15FA1B73C00500F5943E /* TweetTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -247,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				000930561B6FD50500265D05 /* Main.storyboard in Resources */,
+				00DE15FD1B73CD0D00F5943E /* blank-headshot.jpg in Resources */,
 				0009305B1B6FD50500265D05 /* LaunchScreen.xib in Resources */,
 				000930581B6FD50500265D05 /* Images.xcassets in Resources */,
 				0009307A1B706BB100265D05 /* tweet.json in Resources */,
@@ -278,6 +285,7 @@
 				000930511B6FD50500265D05 /* AppDelegate.swift in Sources */,
 				0009307E1B70722800265D05 /* StoryboardConsts.swift in Sources */,
 				005CE4ED1B7199FF00A08C5F /* LoginService.swift in Sources */,
+				00DE15FB1B73C00500F5943E /* TweetTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

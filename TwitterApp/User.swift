@@ -10,10 +10,12 @@ import Foundation
 
 struct User {
   let name: String
-  let profileImageURL: String
+  let screenName: String?
+  let profileImageURL: String?
 }
 
 struct UserJSONKeys {
   static let name = "name"
+  static let screenName = "screen_name"
   static let profileImageURL = "profile_image_url"
 }
