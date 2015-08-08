@@ -15,15 +15,15 @@ class TwitterJSONRequest {
   private var account: ACAccount?
   private init() {}
   
-  class func tweetsFromTimeline(stringURL: String, completionHandler: (String?, [Tweet]?) -> Void) {
+  class func tweetsFromTimeline(stringURL: String, parameters: [String:String]?, completionHandler: (String?, [Tweet]?) -> Void) {
     if let account = sharedInstance.account {
       let twitterTimelineURL = NSURL(string: stringURL)
-      let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL: twitterTimelineURL, parameters: nil)
+      let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL: twitterTimelineURL, parameters: parameters)
       request.account = account
       request.performRequestWithHandler { (data, response, error) -> Void in
         if let error = error {
           let code = " (\(error.code))"
-          completionHandler(ErrorMessageConsts.noConnection, nil)
+          completionHandler(ErrorMessageConsts.noConnection + code, nil)
         } else {
           let status = " (\(response.statusCode))"
           switch response.statusCode {
@@ -51,7 +51,7 @@ class TwitterJSONRequest {
           println(errorMessage)
         } else {
           self.sharedInstance.account = account
-          self.tweetsFromTimeline(stringURL, completionHandler: completionHandler)
+          self.tweetsFromTimeline(stringURL, parameters: parameters, completionHandler: completionHandler)
         }
       }
     }

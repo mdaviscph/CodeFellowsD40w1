@@ -9,8 +9,9 @@
 import Foundation
 
 struct StoryboardConsts {
-  static let TweetTableViewCellReuseIdentifier = "TweetCell"
-  static let TweetDetailSegueIdentifier = "ShowTweetDetail"
-  static let TweetUserTableViewSegueIdentifier = "ShowUserTableView"
-  static let TweetUserTableViewCellReuseIdentifier = "TweetUserCell"
+  static let HomeTimelineTableViewCellReuseIdentifier = "HomeTimelineCell"
+  static let HomeTimelineDetailSegueIdentifier = "ShowHomeTimelineDetail"
+  static let UserTimelineViewControllerSegueIdentifier = "ShowUserTimeline"
+  static let UserTimelineTableViewCellReuseIdentifier = "UserTimelineCell"
+  static let UserTimelineDetailSegueIdentifier = "ShowUserTimelineDetail"
 }

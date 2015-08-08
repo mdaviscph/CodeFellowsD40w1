@@ -1,5 +1,5 @@
 //
-//  TweetsViewController.swift
+//  HomeTimelineTweetsViewController.swift
 //  TwitterApp
 //
 //  Created by mike davis on 8/3/15.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController {
+class HomeTimelineTweetsViewController: UIViewController {
 
   var tweets = [[Tweet]]() {
     didSet {
-      tableView.reloadData()
+      tableView?.reloadData()
     }
   }
   
@@ -31,23 +31,28 @@ class TweetsViewController: UIViewController {
     //  tweets.insert(latestTweets, atIndex: 0)
     //}
     
-    TwitterJSONRequest.tweetsFromTimeline(TwitterURLConsts.statusesHomeTimeline) { (errorMessage, latestTweets) -> Void in
+    println("request: \(TwitterURLConsts.statusesHomeTimeline)")
+    TwitterJSONRequest.tweetsFromTimeline(TwitterURLConsts.statusesHomeTimeline, parameters: nil) { (errorMessage, latestTweets) -> Void in
       if let latestTweets = latestTweets {
         NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
           self.tweets.insert(latestTweets, atIndex: 0)
         }
       }
+      if let errorMessage = errorMessage {
+        // need to alert user via mainQueue alert popover
+        println(errorMessage)
+      }
     }
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if segue.identifier == StoryboardConsts.TweetDetailSegueIdentifier, let detailVC = segue.destinationViewController as? TweetDetailViewController, indexPath = tableView.indexPathForSelectedRow() {
+    if segue.identifier == StoryboardConsts.HomeTimelineDetailSegueIdentifier, let detailVC = segue.destinationViewController as? HomeTimelineTweetDetailViewController, indexPath = tableView.indexPathForSelectedRow() {
       detailVC.tweet = tweets[indexPath.section][indexPath.row]
     }
   }
 }
 
-extension TweetsViewController: UITableViewDataSource {
+extension HomeTimelineTweetsViewController: UITableViewDataSource {
   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
     return tweets.count
   }
@@ -55,15 +60,15 @@ extension TweetsViewController: UITableViewDataSource {
     return tweets[section].count
   }
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier(StoryboardConsts.TweetTableViewCellReuseIdentifier, forIndexPath: indexPath) as! TweetTableViewCell
+    let cell = tableView.dequeueReusableCellWithIdentifier(StoryboardConsts.HomeTimelineTableViewCellReuseIdentifier, forIndexPath: indexPath) as! TweetTableViewCell
     cell.tweet = tweets[indexPath.section][indexPath.row]
     cell.imagesDownloadedDelegate = self
     return cell
   }
 }
 
-extension TweetsViewController: RefreshWhenImagesDownloaded {
+extension HomeTimelineTweetsViewController: RefreshWhenImagesDownloaded {
   func refreshUIThatUsesImage(imageURL: String) {
-    tableView.reloadData()
+    tableView?.reloadData()
   }
 }

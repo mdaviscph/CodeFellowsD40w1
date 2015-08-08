@@ -1,5 +1,5 @@
 //
-//  TweetDetailViewController.swift
+//  HomeTimelineTweetDetailViewController.swift
 //  TwitterApp
 //
 //  Created by mike davis on 8/6/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetDetailViewController: UIViewController {
+class HomeTimelineTweetDetailViewController: UIViewController {
 
   var tweet: Tweet? {
     didSet {
@@ -26,6 +26,12 @@ class TweetDetailViewController: UIViewController {
     super.viewDidLoad()
     imagesDownloadedDelegate = self
     updateUI()
+  }
+  
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == StoryboardConsts.UserTimelineViewControllerSegueIdentifier, let userTimelineVC = segue.destinationViewController as? UserTimelineTweetsViewController {
+      userTimelineVC.user = tweet?.user
+    }
   }
   
   private func updateUI() {
@@ -69,7 +75,7 @@ class TweetDetailViewController: UIViewController {
   }
 }
 
-extension TweetDetailViewController: RefreshWhenImagesDownloaded {
+extension HomeTimelineTweetDetailViewController: RefreshWhenImagesDownloaded {
   func refreshUIThatUsesImage(imageURL: String) {
     updateUI()
   }

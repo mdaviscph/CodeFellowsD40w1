@@ -5,10 +5,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Tweets View Controller-->
+        <!--Home Timeline Tweets View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="TweetsViewController" customModule="TwitterApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="HomeTimelineTweetsViewController" customModule="TwitterApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetCell" rowHeight="140" id="tAa-hr-8br" customClass="TweetTableViewCell" customModule="TwitterApp" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HomeTimelineCell" rowHeight="140" id="tAa-hr-8br" customClass="TweetTableViewCell" customModule="TwitterApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tAa-hr-8br" id="eNv-zh-W6q">
@@ -81,7 +81,7 @@
                                             <outlet property="profileImageView" destination="6hx-qd-778" id="Gk4-Np-AO8"/>
                                             <outlet property="screenNameLabel" destination="c6n-Jd-dEB" id="tjN-Wg-sCZ"/>
                                             <outlet property="theTextLabel" destination="MbC-t2-Rw7" id="81P-gl-8Qg"/>
-                                            <segue destination="q6l-BC-fsb" kind="show" identifier="ShowTweetDetail" id="LrC-ff-2J8"/>
+                                            <segue destination="q6l-BC-fsb" kind="show" identifier="ShowHomeTimelineDetail" id="LrC-ff-2J8"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -108,10 +108,10 @@
             </objects>
             <point key="canvasLocation" x="1112" y="367"/>
         </scene>
-        <!--Tweet Detail View Controller-->
+        <!--Home Timeline Tweet Detail View Controller-->
         <scene sceneID="ztS-fm-Bwh">
             <objects>
-                <viewController id="q6l-BC-fsb" customClass="TweetDetailViewController" customModule="TwitterApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="q6l-BC-fsb" customClass="HomeTimelineTweetDetailViewController" customModule="TwitterApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5sq-IO-cQM"/>
                         <viewControllerLayoutGuide type="bottom" id="zb0-DM-UAY"/>
@@ -135,11 +135,11 @@
                                     <constraint firstAttribute="height" constant="80" id="M0t-YN-twp"/>
                                     <constraint firstAttribute="width" constant="80" id="vbu-mM-x2S"/>
                                 </constraints>
-                                <state key="normal" title="Button" backgroundImage="blank-headshot.jpg">
+                                <state key="normal" backgroundImage="blank-headshot.jpg">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="rbB-hl-AVr" kind="show" identifier="ShowUserTableView" id="CE2-uj-oBf"/>
+                                    <segue destination="rbB-hl-AVr" kind="show" identifier="ShowUserTimeline" id="CE2-uj-oBf"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GwD-zA-cNO">
@@ -177,12 +177,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mDt-eg-9Gy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1848" y="367"/>
+            <point key="canvasLocation" x="1834" y="367"/>
         </scene>
-        <!--User Tweets View Controller-->
+        <!--User Timeline Tweets View Controller-->
         <scene sceneID="52Y-BF-NMy">
             <objects>
-                <viewController id="rbB-hl-AVr" customClass="UserTweetsViewController" customModule="TwitterApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="rbB-hl-AVr" customClass="UserTimelineTweetsViewController" customModule="TwitterApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zAr-9r-geK"/>
                         <viewControllerLayoutGuide type="bottom" id="a1B-Da-Rc5"/>
@@ -195,7 +195,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetCell" rowHeight="140" id="L0M-HE-RRR" customClass="TweetTableViewCell" customModule="TwitterApp" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserTimelineCell" rowHeight="140" id="L0M-HE-RRR" customClass="TweetTableViewCell" customModule="TwitterApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="230" width="600" height="140"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="L0M-HE-RRR" id="Fa9-3g-ETe">
@@ -258,6 +258,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="rbB-hl-AVr" id="zO9-bb-RiY"/>
+                                    <outlet property="delegate" destination="rbB-hl-AVr" id="cFe-BT-s0V"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -270,12 +274,77 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="gbD-f0-Vz2" id="cv0-hG-nka"/>
-                        <outlet property="taleView" destination="gbD-f0-Vz2" id="ofq-ww-auL"/>
+                        <segue destination="y81-9K-cqR" kind="show" identifier="ShowUserTimelineDetail" id="6H6-Jl-MDf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XxB-f0-9A5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2546" y="367"/>
+        </scene>
+        <!--User Timeline Tweet Detail View Controller-->
+        <scene sceneID="sn1-kf-fXR">
+            <objects>
+                <viewController id="y81-9K-cqR" customClass="UserTimelineTweetDetailViewController" customModule="TwitterApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XgJ-8z-EIS"/>
+                        <viewControllerLayoutGuide type="bottom" id="CcL-0P-alS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Wso-YN-dCh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pAX-Gi-pND">
+                                <rect key="frame" x="16" y="160" width="568" height="140"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="140" id="dlY-38-hUs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvT-gR-eI7">
+                                <rect key="frame" x="104" y="72" width="44" height="20"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Icl-H9-eDi">
+                                <rect key="frame" x="16" y="72" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="UdY-67-jf2"/>
+                                    <constraint firstAttribute="height" constant="80" id="nUn-wR-ist"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ScreenName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vR3-yh-ZDz">
+                                <rect key="frame" x="156" y="74" width="83" height="17"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vR3-yh-ZDz" firstAttribute="baseline" secondItem="cvT-gR-eI7" secondAttribute="baseline" id="OmP-ta-tva"/>
+                            <constraint firstItem="pAX-Gi-pND" firstAttribute="leading" secondItem="Wso-YN-dCh" secondAttribute="leadingMargin" id="Qzc-Uu-Wdw"/>
+                            <constraint firstItem="cvT-gR-eI7" firstAttribute="leading" secondItem="Icl-H9-eDi" secondAttribute="trailing" constant="8" symbolic="YES" id="SWI-2X-P4z"/>
+                            <constraint firstItem="Icl-H9-eDi" firstAttribute="top" secondItem="XgJ-8z-EIS" secondAttribute="bottom" constant="8" id="Slm-fP-cIp"/>
+                            <constraint firstItem="Icl-H9-eDi" firstAttribute="leading" secondItem="Wso-YN-dCh" secondAttribute="leadingMargin" id="UKE-Ff-E43"/>
+                            <constraint firstItem="pAX-Gi-pND" firstAttribute="trailing" secondItem="Wso-YN-dCh" secondAttribute="trailingMargin" id="avs-w8-tKM"/>
+                            <constraint firstItem="pAX-Gi-pND" firstAttribute="top" secondItem="Icl-H9-eDi" secondAttribute="bottom" constant="8" symbolic="YES" id="bOE-Te-ibA"/>
+                            <constraint firstItem="cvT-gR-eI7" firstAttribute="top" secondItem="XgJ-8z-EIS" secondAttribute="bottom" constant="8" symbolic="YES" id="jQw-Mz-z49"/>
+                            <constraint firstItem="vR3-yh-ZDz" firstAttribute="leading" secondItem="cvT-gR-eI7" secondAttribute="trailing" constant="8" symbolic="YES" id="oyj-gc-Ggd"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="nameLabel" destination="cvT-gR-eI7" id="l4W-KO-gP5"/>
+                        <outlet property="profileImageView" destination="Icl-H9-eDi" id="PdU-F3-2CT"/>
+                        <outlet property="screenNameLabel" destination="vR3-yh-ZDz" id="PR7-Pr-paI"/>
+                        <outlet property="theTextLabel" destination="pAX-Gi-pND" id="1br-HK-vtR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e09-9B-u6N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3280" y="367"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1SH-Qg-TZK">

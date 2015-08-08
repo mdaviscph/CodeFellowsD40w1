@@ -23,13 +23,13 @@ class TweetJSONParser {
             let profileImageURL = userDictionary[UserJSONKeys.profileImageURL] as? String
             let user = User(name: name, screenName: screenName, profileImageURL: profileImageURL)
             retweet = Tweet(text: text, createdAt: createdAt, id: id, user: user, retweet: nil)
-            println("retweet from \(name)")
+            //println("retweet from \(name)")
           }
           let screenName = userDictionary[UserJSONKeys.screenName] as? String
           let profileImageURL = userDictionary[UserJSONKeys.profileImageURL] as? String
           let user = User(name: name, screenName: screenName, profileImageURL: profileImageURL)
           let tweet = Tweet(text: text, createdAt: createdAt, id: id, user: user, retweet: retweet)
-          println("tweet from \(name)")
+          //println("tweet from \(name)")
           tweets.append(tweet)
         }
       }
