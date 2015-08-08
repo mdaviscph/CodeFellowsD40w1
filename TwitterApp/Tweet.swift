@@ -8,13 +8,23 @@
 
 import Foundation
 
-struct Tweet {
+// needs to be a class because of recursive reference to Tweet
+class Tweet {
   let text: String
   let createdAt: String
   let id: String
   let user: User?
-  let retweet: Bool
+  let retweet: Tweet?
+
+  init(text: String, createdAt: String, id: String, user: User?, retweet: Tweet?) {
+    self.text = text
+    self.createdAt = createdAt
+    self.id = id
+    self.user = user
+    self.retweet = retweet
+  }
 }
+
 
 struct TweetJSONKeys {
   static let text = "text"

@@ -1,15 +1,16 @@
 //
-//  TweetViewController.swift
+//  UserTweetsViewController.swift
 //  TwitterApp
 //
-//  Created by mike davis on 8/3/15.
+//  Created by mike davis on 8/7/15.
 //  Copyright (c) 2015 mike davis. All rights reserved.
 //
 
 import UIKit
 
-class TweetViewController: UIViewController {
-
+class UserTweetsViewController: UIViewController {
+  
+  var user = User?()
   var tweets = [[Tweet]]() {
     didSet {
       tableView.reloadData()
@@ -26,22 +27,12 @@ class TweetViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    //if let jsonData = TweetJSONFile.loadJSONFileInBundle("tweet", fileType: "json"),
-    //    latestTweets = TweetJSONParser.parseJSONData(jsonData) {
-    //  tweets.insert(latestTweets, atIndex: 0)
-    //}
-    
-    LoginService.loginForTwitter { (errorMessage, account) -> Void in
-      if let errorMessage = errorMessage {
-        println(errorMessage)
-      } else {
-        if let account = account {
-          TwitterJSONRequest.tweetsFromHomeTimeline(account) { (errorMessage, latestTweets) -> Void in
-            if let latestTweets = latestTweets {
-              NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
-                self.tweets.insert(latestTweets, atIndex: 0)
-              }
-            }
+    if let screenName = user?.screenName {
+      let stringURL = TwitterURLConsts.statusesUserTimeline + "?@" + screenName
+      TwitterJSONRequest.tweetsFromTimeline(stringURL) { (errorMessage, latestTweets) -> Void in
+        if let latestTweets = latestTweets {
+          NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
+            self.tweets.insert(latestTweets, atIndex: 0)
           }
         }
       }
@@ -55,7 +46,7 @@ class TweetViewController: UIViewController {
   }
 }
 
-extension TweetViewController: UITableViewDataSource, UITableViewDelegate {
+extension UserTweetsViewController: UITableViewDataSource {
   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
     return tweets.count
   }
@@ -65,6 +56,14 @@ extension TweetViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(StoryboardConsts.TweetTableViewCellReuseIdentifier, forIndexPath: indexPath) as! TweetTableViewCell
     cell.tweet = tweets[indexPath.section][indexPath.row]
+    cell.imagesDownloadedDelegate = self
     return cell
   }
 }
+
+extension UserTweetsViewController: RefreshWhenImagesDownloaded {
+  func refreshUIThatUsesImage(imageURL: String) {
+    tableView.reloadData()
+  }
+}
+

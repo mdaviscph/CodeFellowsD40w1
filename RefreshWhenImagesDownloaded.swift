@@ -6,4 +6,7 @@
 //  Copyright (c) 2015 mike davis. All rights reserved.
 //
 
-import Foundation
+
+protocol RefreshWhenImagesDownloaded {
+  func refreshUIThatUsesImage(imageURL: String)
+}
