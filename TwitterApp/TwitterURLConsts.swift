@@ -11,4 +11,6 @@ import Foundation
 struct TwitterURLConsts {
   static let statusesHomeTimeline = "https://api.twitter.com/1.1/statuses/home_timeline.json"
   static let statusesUserTimeline = "https://api.twitter.com/1.1/statuses/user_timeline.json"
+  static let profileImageNormal = "normal"
+  static let profileImageBigger = "bigger"
 }

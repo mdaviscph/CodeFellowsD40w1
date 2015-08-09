@@ -10,42 +10,72 @@ import UIKit
 
 class ProfileImageCache {
   
-  static let sharedInstance = ProfileImageCache()
-  func clear() {
-    imageCache.removeAll()
-    imageRequested.removeAll()
-  }
-  func image(stringURL: String, size: CGSize, completionHandler: (String) -> Void) -> UIImage? {
-    let key = stringURL + "\(size.width)\(size.height)"
-    if let value = imageCache[key] {
-      imageRequested[key] = nil
-      println("cached image returned: \(key)")
-      return value
-    }
-    else if let requested = imageRequested[key] where requested {
-      return nil
-    }
-    else {
-      println(stringURL)
-      backgroundQueue.addOperationWithBlock { () -> Void in
-        if let URL = NSURL(string: stringURL), data = NSData(contentsOfURL: URL), image = UIImage(data: data) {
-          // fastest way to resize an image; from nshipster.com
-          UIGraphicsBeginImageContext(size)
-          image.drawInRect(CGRect(origin: CGPoint.zeroPoint, size: size))
-          let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
-          UIGraphicsEndImageContext()
-          self.imageCache[key] = resizedImage
-          println("image returned: \(key)")
-          completionHandler(stringURL)
-        }
-      }
-      imageRequested[key] = true
-      return nil
-    }
-  }
-  
   private init () {}
   private var imageCache = [String:UIImage]()
   private var imageRequested = [String:Bool]()
   private lazy var backgroundQueue = NSOperationQueue()
+  
+  static let sharedInstance = ProfileImageCache()
+  
+  func clear() {
+    imageCache.removeAll()
+    imageRequested.removeAll()
+  }
+  
+  func image(stringURL: String, size: CGSize, completionHandler: (String) -> Void) -> UIImage? {
+    if let imageURL = imageURLBiggerIsBetter(stringURL), stringBigURL = imageURL.absoluteString {
+      let key = stringBigURL + "\(Int(size.width))\(Int(size.height))"
+      if let value = imageCache[key] {
+        imageRequested[key] = nil
+        println("cached image returned: \(stringBigURL)")
+        return value
+      }
+      else if let requested = imageRequested[key] where requested {
+        return nil
+      }
+      else {
+        println("download requested: \(stringBigURL)")
+        backgroundQueue.addOperationWithBlock { () -> Void in
+          if let data = NSData(contentsOfURL: imageURL), image = UIImage(data: data) {
+            // fastest way to resize an image; from nshipster.com
+            // rounded corner method is my own; not sure of performance loss
+            UIGraphicsBeginImageContext(size)
+            let rect = CGRect(origin: CGPoint.zeroPoint, size: size)
+            let inset = size.width/8
+            image.drawInRect(rect)
+            let path = UIBezierPath(roundedRect: CGRectInset(rect, -inset, -inset), cornerRadius: size.width/4)
+            UIColor.whiteColor().setStroke()
+            path.lineWidth = inset*2
+            path.stroke()
+            let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            self.imageCache[key] = resizedImage
+            //println("image returned: \(key)") println in background queue sometimes intermixes in console
+            completionHandler(stringBigURL)
+          }
+        }
+        imageRequested[key] = true
+        return nil
+      }
+    }
+    return nil
+  }
+  func imageURLBiggerIsBetter(stringURL: String) -> NSURL? {
+    let normalImageURL = NSURL(string: stringURL)
+    var biggerImageURL = NSURL(string: stringURL)
+    if let pathExtension = biggerImageURL?.pathExtension {
+      biggerImageURL = biggerImageURL?.URLByDeletingPathExtension
+      if let lastPathComponent = biggerImageURL?.lastPathComponent where lastPathComponent.hasSuffix(TwitterURLConsts.profileImageNormal) {
+        biggerImageURL = biggerImageURL?.URLByDeletingLastPathComponent
+        var pathComponent = lastPathComponent
+        let range = advance(pathComponent.endIndex, -count(TwitterURLConsts.profileImageNormal))..<pathComponent.endIndex
+        pathComponent.removeRange(range)
+        pathComponent += TwitterURLConsts.profileImageBigger
+        biggerImageURL = biggerImageURL?.URLByAppendingPathComponent(pathComponent)
+        biggerImageURL = biggerImageURL?.URLByAppendingPathExtension(pathExtension)
+        return biggerImageURL
+      }
+    }
+    return normalImageURL
+  }
 }

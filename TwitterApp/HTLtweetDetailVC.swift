@@ -27,6 +27,14 @@ class HomeTimelineTweetDetailViewController: UIViewController {
     imagesDownloadedDelegate = self
     updateUI()
   }
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    startObservingNotifications()
+  }
+  override func viewWillDisappear(animated: Bool) {
+    super.viewWillDisappear(animated)
+    stopObservingNotifications()
+  }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == StoryboardConsts.UserTimelineViewControllerSegueIdentifier, let userTimelineVC = segue.destinationViewController as? UserTimelineTweetsViewController {
@@ -34,7 +42,7 @@ class HomeTimelineTweetDetailViewController: UIViewController {
     }
   }
   
-  private func updateUI() {
+  func updateUI() {
     if let retweet = tweet?.retweet {
       updateTextUI(name: retweet.user?.name, text: retweet.text, screenName: retweet.user?.screenName)
       if let profileImageURL = retweet.user?.profileImageURL, imageView = profileImageButton {
@@ -66,17 +74,27 @@ class HomeTimelineTweetDetailViewController: UIViewController {
     default:
       resize = size
     }
-    let image = ProfileImageCache.sharedInstance.image(profileImageURL, size: resize) { (imageURL) -> Void in
+    let image = ProfileImageCache.sharedInstance.image(profileImageURL, size: resize) { (stringURL) -> Void in
       NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
-        self.imagesDownloadedDelegate?.refreshUIThatUsesImage(imageURL)
+        self.imagesDownloadedDelegate?.refreshUIThatUsesImage(stringURL)
       }
     }
     profileImageButton.setBackgroundImage(image, forState: UIControlState.Normal)
   }
 }
 
+extension HomeTimelineTweetDetailViewController {
+  func startObservingNotifications() {
+    NSNotificationCenter.defaultCenter().addObserver(self, selector:Selector("updateUI"),
+      name: UIContentSizeCategoryDidChangeNotification, object:nil)
+  }
+  func stopObservingNotifications() {
+    NSNotificationCenter.defaultCenter().removeObserver(self, name: UIContentSizeCategoryDidChangeNotification, object: nil)}
+}
+
 extension HomeTimelineTweetDetailViewController: RefreshWhenImagesDownloaded {
-  func refreshUIThatUsesImage(imageURL: String) {
+  func refreshUIThatUsesImage(stringURL: String) {
+    println("refreshing due to image: \(stringURL)")
     updateUI()
   }
 }

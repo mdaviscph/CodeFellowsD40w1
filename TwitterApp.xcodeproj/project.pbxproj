@@ -27,6 +27,7 @@
 		00735FF61B755659003E0A5A /* RefreshWhenImagesDownloaded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00735FF51B755659003E0A5A /* RefreshWhenImagesDownloaded.swift */; };
 		00735FF81B7583D6003E0A5A /* UTLtweetsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00735FF71B7583D6003E0A5A /* UTLtweetsVC.swift */; };
 		00C6775F1B75BACD00275B34 /* UTLtweetDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C6775E1B75BACD00275B34 /* UTLtweetDetailVC.swift */; };
+		00C677631B76939900275B34 /* TimelineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00C677621B76939900275B34 /* TimelineCell.xib */; };
 		00DE15FB1B73C00500F5943E /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DE15FA1B73C00500F5943E /* TweetTableViewCell.swift */; };
 		00DE15FD1B73CD0D00F5943E /* blank-headshot.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 00DE15FC1B73CD0D00F5943E /* blank-headshot.jpg */; };
 		00DE15FF1B73D6A100F5943E /* HTLtweetDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DE15FE1B73D6A100F5943E /* HTLtweetDetailVC.swift */; };
@@ -64,9 +65,10 @@
 		005CE4F21B71A8F700A08C5F /* TwitterJSONRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterJSONRequest.swift; sourceTree = "<group>"; };
 		005CE4F41B72672900A08C5F /* TwitterURLConsts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterURLConsts.swift; sourceTree = "<group>"; };
 		00735FF31B750D13003E0A5A /* ProfileImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageCache.swift; sourceTree = "<group>"; };
-		00735FF51B755659003E0A5A /* RefreshWhenImagesDownloaded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshWhenImagesDownloaded.swift; sourceTree = "<group>"; };
+		00735FF51B755659003E0A5A /* RefreshWhenImagesDownloaded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RefreshWhenImagesDownloaded.swift; path = ../RefreshWhenImagesDownloaded.swift; sourceTree = "<group>"; };
 		00735FF71B7583D6003E0A5A /* UTLtweetsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UTLtweetsVC.swift; sourceTree = "<group>"; };
 		00C6775E1B75BACD00275B34 /* UTLtweetDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UTLtweetDetailVC.swift; sourceTree = "<group>"; };
+		00C677621B76939900275B34 /* TimelineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimelineCell.xib; sourceTree = "<group>"; };
 		00DE15FA1B73C00500F5943E /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
 		00DE15FC1B73CD0D00F5943E /* blank-headshot.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "blank-headshot.jpg"; sourceTree = "<group>"; };
 		00DE15FE1B73D6A100F5943E /* HTLtweetDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTLtweetDetailVC.swift; sourceTree = "<group>"; };
@@ -93,7 +95,6 @@
 		000930421B6FD50500265D05 = {
 			isa = PBXGroup;
 			children = (
-				00735FF51B755659003E0A5A /* RefreshWhenImagesDownloaded.swift */,
 				0009304D1B6FD50500265D05 /* TwitterApp */,
 				000930631B6FD50500265D05 /* TwitterAppTests */,
 				0009304C1B6FD50500265D05 /* Products */,
@@ -161,6 +162,7 @@
 				00C6775E1B75BACD00275B34 /* UTLtweetDetailVC.swift */,
 				005CE4EC1B7199FF00A08C5F /* LoginService.swift */,
 				00735FF31B750D13003E0A5A /* ProfileImageCache.swift */,
+				00735FF51B755659003E0A5A /* RefreshWhenImagesDownloaded.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -181,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				000930541B6FD50500265D05 /* Main.storyboard */,
+				00C677621B76939900275B34 /* TimelineCell.xib */,
 				0009307D1B70722800265D05 /* StoryboardConsts.swift */,
 				00DE15FA1B73C00500F5943E /* TweetTableViewCell.swift */,
 			);
@@ -267,6 +270,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00C677631B76939900275B34 /* TimelineCell.xib in Resources */,
 				000930561B6FD50500265D05 /* Main.storyboard in Resources */,
 				00DE15FD1B73CD0D00F5943E /* blank-headshot.jpg in Resources */,
 				0009305B1B6FD50500265D05 /* LaunchScreen.xib in Resources */,

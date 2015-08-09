@@ -9,9 +9,9 @@
 import Foundation
 
 struct StoryboardConsts {
-  static let HomeTimelineTableViewCellReuseIdentifier = "HomeTimelineCell"
   static let HomeTimelineDetailSegueIdentifier = "ShowHomeTimelineDetail"
   static let UserTimelineViewControllerSegueIdentifier = "ShowUserTimeline"
-  static let UserTimelineTableViewCellReuseIdentifier = "UserTimelineCell"
   static let UserTimelineDetailSegueIdentifier = "ShowUserTimelineDetail"
+  static let TimelineCellReuseIdentifier = "TimelineCell"
+  static let TimelineCellNibName = "TimelineCell"
 }

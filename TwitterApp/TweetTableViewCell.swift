@@ -48,9 +48,9 @@ class TweetTableViewCell: UITableViewCell {
     default:
       resize = size
     }
-    profileImageView.image = ProfileImageCache.sharedInstance.image(profileImageURL, size: resize) { (imageURL) -> Void in
+    profileImageView.image = ProfileImageCache.sharedInstance.image(profileImageURL, size: resize) { (stringURL) -> Void in
       NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
-        self.imagesDownloadedDelegate?.refreshUIThatUsesImage(imageURL)
+        self.imagesDownloadedDelegate?.refreshUIThatUsesImage(stringURL)
       }
     }
   }

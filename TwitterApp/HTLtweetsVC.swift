@@ -12,29 +12,39 @@ class HomeTimelineTweetsViewController: UIViewController {
 
   var tweets = [[Tweet]]() {
     didSet {
-      tableView?.reloadData()
+      updateUI()
     }
   }
   
   @IBOutlet weak var tableView: UITableView! {
     didSet {
-      tableView.estimatedRowHeight = tableView.rowHeight
+      tableView.estimatedRowHeight = 140 //change from setting to tableView.rowHeight due to using Nib
       tableView.rowHeight = UITableViewAutomaticDimension
     }
+  }
+  @IBOutlet weak var busyIndicator: UIActivityIndicatorView!
+  
+  func updateUI() {
+    tableView?.reloadData()
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    let nib = UINib(nibName: StoryboardConsts.TimelineCellNibName, bundle: NSBundle.mainBundle())
+    tableView.registerNib(nib, forCellReuseIdentifier: StoryboardConsts.TimelineCellReuseIdentifier)
+
     //if let jsonData = TweetJSONFile.loadJSONFileInBundle("tweet", fileType: "json"),
     //    latestTweets = TweetJSONParser.parseJSONData(jsonData) {
     //  tweets.insert(latestTweets, atIndex: 0)
     //}
     
     println("request: \(TwitterURLConsts.statusesHomeTimeline)")
+    busyIndicator.startAnimating()
     TwitterJSONRequest.tweetsFromTimeline(TwitterURLConsts.statusesHomeTimeline, parameters: nil) { (errorMessage, latestTweets) -> Void in
       if let latestTweets = latestTweets {
         NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
+          self.busyIndicator.stopAnimating()
           self.tweets.insert(latestTweets, atIndex: 0)
         }
       }
@@ -43,6 +53,16 @@ class HomeTimelineTweetsViewController: UIViewController {
         println(errorMessage)
       }
     }
+
+  }
+  
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    startObservingNotifications()
+  }
+  override func viewWillDisappear(animated: Bool) {
+    super.viewWillDisappear(animated)
+    stopObservingNotifications()
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -52,6 +72,20 @@ class HomeTimelineTweetsViewController: UIViewController {
   }
 }
 
+extension HomeTimelineTweetsViewController {
+  func startObservingNotifications() {
+    NSNotificationCenter.defaultCenter().addObserver(self, selector:Selector("updateUI"),
+      name: UIContentSizeCategoryDidChangeNotification, object:nil)
+  }
+  func stopObservingNotifications() {
+    NSNotificationCenter.defaultCenter().removeObserver(self, name: UIContentSizeCategoryDidChangeNotification, object: nil)}
+}
+
+extension HomeTimelineTweetsViewController: UITableViewDelegate {
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    performSegueWithIdentifier(StoryboardConsts.HomeTimelineDetailSegueIdentifier, sender: tableView)
+  }
+}
 extension HomeTimelineTweetsViewController: UITableViewDataSource {
   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
     return tweets.count
@@ -60,7 +94,7 @@ extension HomeTimelineTweetsViewController: UITableViewDataSource {
     return tweets[section].count
   }
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier(StoryboardConsts.HomeTimelineTableViewCellReuseIdentifier, forIndexPath: indexPath) as! TweetTableViewCell
+    let cell = tableView.dequeueReusableCellWithIdentifier(StoryboardConsts.TimelineCellReuseIdentifier, forIndexPath: indexPath) as! TweetTableViewCell
     cell.tweet = tweets[indexPath.section][indexPath.row]
     cell.imagesDownloadedDelegate = self
     return cell
@@ -68,7 +102,8 @@ extension HomeTimelineTweetsViewController: UITableViewDataSource {
 }
 
 extension HomeTimelineTweetsViewController: RefreshWhenImagesDownloaded {
-  func refreshUIThatUsesImage(imageURL: String) {
-    tableView?.reloadData()
+  func refreshUIThatUsesImage(stringURL: String) {
+    println("refreshing due to image: \(stringURL)")
+    updateUI()
   }
 }

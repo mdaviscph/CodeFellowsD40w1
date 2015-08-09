@@ -27,6 +27,15 @@ class UserTimelineTweetDetailViewController: UIViewController {
     updateUI()
   }
   
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    startObservingNotifications()
+  }
+  override func viewWillDisappear(animated: Bool) {
+    super.viewWillDisappear(animated)
+    stopObservingNotifications()
+  }
+  
   private func updateUI() {
     updateTextUI(name: tweet?.user?.name, text: tweet?.text, screenName: tweet?.user?.screenName)
     if let profileImageURL = tweet?.user?.profileImageURL, imageView = profileImageView {
@@ -51,17 +60,27 @@ class UserTimelineTweetDetailViewController: UIViewController {
     default:
       resize = size
     }
-    let image = ProfileImageCache.sharedInstance.image(profileImageURL, size: resize) { (imageURL) -> Void in
+    let image = ProfileImageCache.sharedInstance.image(profileImageURL, size: resize) { (stringURL) -> Void in
       NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
-        self.imagesDownloadedDelegate?.refreshUIThatUsesImage(imageURL)
+        self.imagesDownloadedDelegate?.refreshUIThatUsesImage(stringURL)
       }
     }
     profileImageView.image = image
   }
 }
 
+extension UserTimelineTweetDetailViewController {
+  func startObservingNotifications() {
+    NSNotificationCenter.defaultCenter().addObserver(self, selector:Selector("updateUI"),
+      name: UIContentSizeCategoryDidChangeNotification, object:nil)
+  }
+  func stopObservingNotifications() {
+    NSNotificationCenter.defaultCenter().removeObserver(self, name: UIContentSizeCategoryDidChangeNotification, object: nil)}
+}
+
 extension UserTimelineTweetDetailViewController: RefreshWhenImagesDownloaded {
-  func refreshUIThatUsesImage(imageURL: String) {
+  func refreshUIThatUsesImage(stringURL: String) {
+    println("refreshing due to image: \(stringURL)")
     updateUI()
   }
 }
