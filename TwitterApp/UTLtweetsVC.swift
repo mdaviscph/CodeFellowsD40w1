@@ -17,6 +17,11 @@ class UserTimelineTweetsViewController: UIViewController {
     }
   }
   
+  @IBOutlet weak var nameLabel: UILabel!
+  @IBOutlet weak var screenNameLabel: UILabel!
+  @IBOutlet weak var descriptionLabel: UILabel!
+  @IBOutlet weak var locationLabel: UILabel!
+  @IBOutlet weak var profileImageView: UIImageView!
   @IBOutlet weak var tableView: UITableView! {
     didSet {
       tableView.estimatedRowHeight = 140 //change from setting to tableView.rowHeight due to using Nib
@@ -27,6 +32,8 @@ class UserTimelineTweetsViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    updateUI()
     
     let nib = UINib(nibName: StoryboardConsts.TimelineCellNibName, bundle: NSBundle.mainBundle())
     tableView.registerNib(nib, forCellReuseIdentifier: StoryboardConsts.TimelineCellReuseIdentifier)
@@ -48,6 +55,7 @@ class UserTimelineTweetsViewController: UIViewController {
         }
       }
     }
+    
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -59,6 +67,40 @@ class UserTimelineTweetsViewController: UIViewController {
     stopObservingNotifications()
   }
   
+  private func updateUI() {
+    updateTextUI(name: user?.name, screenName: user?.screenName, description: user?.description, location: user?.location)
+    if let profileImageURL = user?.profileImageURL, imageView = profileImageView {
+      updateProfileImageUI(profileImageURL, size: imageView.bounds.size)
+    }
+    tableView?.reloadData()
+  }
+  private func updateTextUI(#name: String?, screenName: String?, description: String?, location: String?) {
+    nameLabel?.text = name
+    descriptionLabel?.text = description
+    locationLabel?.text = location
+    if let screenName = screenName {
+      screenNameLabel?.text = "@" + screenName
+    }
+  }
+  private func updateProfileImageUI(profileImageURL: String, size: CGSize) {
+    let scale = UIScreen.mainScreen().scale
+    let resize: CGSize
+    switch scale {
+    case 2:
+      resize = CGSize(width: size.width*2, height: size.height*2)
+    case 3:
+      resize = CGSize(width: size.width*3, height: size.height*3)
+    default:
+      resize = size
+    }
+    let image = ProfileImageCache.sharedInstance.image(profileImageURL, size: resize) { (stringURL) -> Void in
+      NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
+        self.refreshUIThatUsesImage(stringURL)
+      }
+    }
+    profileImageView.image = image
+  }
+  
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == StoryboardConsts.UserTimelineDetailSegueIdentifier, let detailVC = segue.destinationViewController as? UserTimelineTweetDetailViewController, indexPath = tableView.indexPathForSelectedRow() {
       detailVC.tweet = tweets[indexPath.section][indexPath.row]
@@ -68,7 +110,7 @@ class UserTimelineTweetsViewController: UIViewController {
 
 extension UserTimelineTweetsViewController: UITableViewDelegate {
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    performSegueWithIdentifier(StoryboardConsts.HomeTimelineDetailSegueIdentifier, sender: tableView)
+    performSegueWithIdentifier(StoryboardConsts.UserTimelineDetailSegueIdentifier, sender: tableView)
   }
 }
 extension UserTimelineTweetsViewController: UITableViewDataSource {
@@ -98,7 +140,7 @@ extension UserTimelineTweetsViewController {
 extension UserTimelineTweetsViewController: RefreshWhenImagesDownloaded {
   func refreshUIThatUsesImage(stringURL: String) {
     println("refreshing due to image: \(stringURL)")
-    tableView?.reloadData()
+    updateUI()
   }
 }
 

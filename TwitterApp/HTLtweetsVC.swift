@@ -22,14 +22,16 @@ class HomeTimelineTweetsViewController: UIViewController {
       tableView.rowHeight = UITableViewAutomaticDimension
     }
   }
-  @IBOutlet weak var busyIndicator: UIActivityIndicatorView!
-  
-  func updateUI() {
-    tableView?.reloadData()
+  @IBAction func homeTapped(sender: AnyObject) {
+    let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+    tableView?.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
   }
+  @IBOutlet weak var busyIndicator: UIActivityIndicatorView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    updateUI()
     
     let nib = UINib(nibName: StoryboardConsts.TimelineCellNibName, bundle: NSBundle.mainBundle())
     tableView.registerNib(nib, forCellReuseIdentifier: StoryboardConsts.TimelineCellReuseIdentifier)
@@ -63,6 +65,10 @@ class HomeTimelineTweetsViewController: UIViewController {
   override func viewWillDisappear(animated: Bool) {
     super.viewWillDisappear(animated)
     stopObservingNotifications()
+  }
+  
+  func updateUI() {
+    tableView?.reloadData()
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
