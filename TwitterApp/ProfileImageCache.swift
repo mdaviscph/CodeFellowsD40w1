@@ -10,7 +10,12 @@ import UIKit
 
 class ProfileImageCache {
   
-  private init () {}
+  private init () {
+    if backgroundQueue.operationCount == 0 {
+      let serialQueue = dispatch_queue_create("com.mdaviscph.imageSerialQueue", DISPATCH_QUEUE_SERIAL)
+      backgroundQueue.underlyingQueue = serialQueue
+    }
+  }
   private var imageCache = [String:UIImage]()
   private var imageRequested = [String:Bool]()
   private lazy var backgroundQueue = NSOperationQueue()
@@ -25,13 +30,6 @@ class ProfileImageCache {
   func image(stringURL: String, size: CGSize, completionHandler: (String) -> Void) -> UIImage? {
     if let imageURL = imageURLBiggerIsBetter(stringURL), stringBigURL = imageURL.absoluteString {
       let key = stringBigURL + "\(Int(size.width))\(Int(size.height))"
-      var cnt = 0
-      for (_, _) in imageCache {
-        cnt++
-      }
-      if cnt != imageCache.count {
-        println("Houston, we have a problem.")
-      }
       if let value = imageCache[key] {
         imageRequested[key] = nil
         println("cached image returned: \(stringBigURL)")
@@ -57,13 +55,14 @@ class ProfileImageCache {
             path.stroke()
             let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
-            NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
-              self.imageCache[key] = resizedImage       // in main queue to serialize changes to the dictionary
-            }
+
+            self.imageCache[key] = resizedImage
+
             completionHandler(stringBigURL)
           }
         }
         imageRequested[key] = true
+        println("background serial queue count: \(backgroundQueue.operationCount)")
         return nil
       }
     }
