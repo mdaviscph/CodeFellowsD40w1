@@ -57,7 +57,9 @@ class ProfileImageCache {
             path.stroke()
             let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
-            self.imageCache[key] = resizedImage
+            NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
+              self.imageCache[key] = resizedImage       // in main queue to serialize changes to the dictionary
+            }
             completionHandler(stringBigURL)
           }
         }
