@@ -101,8 +101,9 @@ extension HomeTimelineTweetsViewController: UITableViewDataSource {
   }
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(StoryboardConsts.TimelineCellReuseIdentifier, forIndexPath: indexPath) as! TweetTableViewCell
+    cell.imagesDownloadedDelegate = self      // must do this before assigning to cell.tweet due to didSet calling updateUI
     cell.tweet = tweets[indexPath.section][indexPath.row]
-    cell.imagesDownloadedDelegate = self
+    cell.selectionStyle = .None
     return cell
   }
 }

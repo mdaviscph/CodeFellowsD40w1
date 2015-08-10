@@ -14,7 +14,7 @@ class TweetTableViewCell: UITableViewCell {
 
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var screenNameLabel: UILabel!
-  @IBOutlet weak var hoursOldLabel: UILabel!
+  @IBOutlet weak var createdAtLabel: UILabel!
   @IBOutlet weak var theTextLabel: UILabel!
   @IBOutlet weak var profileImageView: UIImageView!
   
@@ -25,16 +25,28 @@ class TweetTableViewCell: UITableViewCell {
   }
   
   private func updateUI() {
-    updateTextUI(name: tweet?.user?.name, text: tweet?.text, screenName: tweet?.user?.screenName)
+    updateTextUI(name: tweet?.user?.name, text: tweet?.text, screenName: tweet?.user?.screenName, createdAt: tweet?.createdAt)
     if let profileImageURL = tweet?.user?.profileImageURL, imageView = profileImageView {
       updateProfileImageUI(profileImageURL, size: imageView.bounds.size)
     }
   }
-  private func updateTextUI(#name: String?, text: String?, screenName: String?) {
+  private func updateTextUI(#name: String?, text: String?, screenName: String?, createdAt: String?) {
     nameLabel?.text = name
     theTextLabel?.text = text
     if let screenName = screenName {
       screenNameLabel?.text = "@" + screenName
+    }
+    if let createdAt = createdAt {
+      // twitter UTC string example : "Wed Aug 27 13:08:45 +0000 2008"
+      let dateFormatter = NSDateFormatter()
+      dateFormatter.dateFormat = "EEE LLL d HH:mm:ss +0000 yyyy zzz"
+      if let date = dateFormatter.dateFromString(createdAt + " UTC") {
+        let interval = -date.timeIntervalSinceNow
+        let seconds = Int(interval)
+        let minutes = Int(interval/60)
+        let hours = Int(interval/3600)
+        createdAtLabel?.text = (hours > 0) ? "\(hours)hr" : (minutes > 0) ? "\(minutes)m" : "\(seconds)s"
+      }
     }
   }
   private func updateProfileImageUI(profileImageURL: String, size: CGSize) {

@@ -38,7 +38,11 @@ class HomeTimelineTweetDetailViewController: UIViewController {
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == StoryboardConsts.UserTimelineViewControllerSegueIdentifier, let userTimelineVC = segue.destinationViewController as? UserTimelineTweetsViewController {
-      userTimelineVC.user = tweet?.user
+      if let retweet = tweet?.retweet {
+        userTimelineVC.user = retweet.user
+      } else {
+        userTimelineVC.user = tweet?.user
+      }
     }
   }
   

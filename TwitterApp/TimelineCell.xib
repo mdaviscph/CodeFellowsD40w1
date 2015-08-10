@@ -63,7 +63,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="hoursOldLabel" destination="XkE-3g-XUC" id="8dr-Tw-ySh"/>
+                <outlet property="createdAtLabel" destination="XkE-3g-XUC" id="grc-pa-1PN"/>
                 <outlet property="nameLabel" destination="9Lk-iW-awF" id="dhf-of-iMM"/>
                 <outlet property="profileImageView" destination="Ztc-XJ-biJ" id="v7i-yq-Wi0"/>
                 <outlet property="screenNameLabel" destination="49t-Qe-p97" id="BKp-QK-oTE"/>

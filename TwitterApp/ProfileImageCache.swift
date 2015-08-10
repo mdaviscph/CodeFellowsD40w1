@@ -25,12 +25,20 @@ class ProfileImageCache {
   func image(stringURL: String, size: CGSize, completionHandler: (String) -> Void) -> UIImage? {
     if let imageURL = imageURLBiggerIsBetter(stringURL), stringBigURL = imageURL.absoluteString {
       let key = stringBigURL + "\(Int(size.width))\(Int(size.height))"
+      var cnt = 0
+      for (_, _) in imageCache {
+        cnt++
+      }
+      if cnt != imageCache.count {
+        println("Houston, we have a problem.")
+      }
       if let value = imageCache[key] {
         imageRequested[key] = nil
         println("cached image returned: \(stringBigURL)")
         return value
       }
       else if let requested = imageRequested[key] where requested {
+        println("image not back yet for: \(stringBigURL)")
         return nil
       }
       else {
@@ -50,7 +58,6 @@ class ProfileImageCache {
             let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             self.imageCache[key] = resizedImage
-            //println("image returned: \(key)") println in background queue sometimes intermixes in console
             completionHandler(stringBigURL)
           }
         }
