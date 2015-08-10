@@ -73,6 +73,7 @@ class HomeTimelineTweetsViewController: UIViewController {
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == StoryboardConsts.HomeTimelineDetailSegueIdentifier, let detailVC = segue.destinationViewController as? HomeTimelineTweetDetailViewController, indexPath = tableView.indexPathForSelectedRow() {
+      detailVC.imagesDownloadedDelegate = self
       detailVC.tweet = tweets[indexPath.section][indexPath.row]
     }
   }
