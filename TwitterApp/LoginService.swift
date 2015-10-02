@@ -15,6 +15,7 @@ class LoginService {
     let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
     accountStore.requestAccessToAccountsWithType(accountType, options: nil) { (granted, error) -> Void in
       if let error = error {
+        print(error.localizedDescription)
         completionHandler(ErrorMessageConsts.notSignedIn, nil)
       } else {
         if granted {

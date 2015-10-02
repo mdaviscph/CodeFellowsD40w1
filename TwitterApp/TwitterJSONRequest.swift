@@ -48,7 +48,7 @@ class TwitterJSONRequest {
     } else {
       LoginService.loginForTwitter { (errorMessage, account) -> Void in
         if let errorMessage = errorMessage {
-          println(errorMessage)
+          print(errorMessage)
         } else {
           self.sharedInstance.account = account
           self.tweetsFromTimeline(stringURL, parameters: parameters, completionHandler: completionHandler)

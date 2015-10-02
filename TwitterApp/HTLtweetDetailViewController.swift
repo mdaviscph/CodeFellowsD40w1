@@ -60,7 +60,7 @@ class HomeTimelineTweetDetailViewController: UIViewController {
       }
     }
   }
-  private func updateTextUI(#name: String?, text: String?, screenName: String?) {
+  private func updateTextUI(name name: String?, text: String?, screenName: String?) {
     nameLabel?.text = name
     theTextLabel?.text = text
     if let screenName = screenName {
@@ -98,7 +98,7 @@ extension HomeTimelineTweetDetailViewController {
 
 extension HomeTimelineTweetDetailViewController: RefreshWhenImagesDownloaded {
   func refreshUIThatUsesImage(stringURL: String) {
-    println("refreshing due to image: \(stringURL)")
+    print("refreshing due to image: \(stringURL)")
     updateUI()
   }
 }

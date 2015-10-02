@@ -40,7 +40,7 @@ class UserTimelineTweetsViewController: UIViewController {
     
     if let screenName = user?.screenName {
       let parameters = [UserJSONKeys.screenName:screenName]
-      println("request \(TwitterURLConsts.statusesUserTimeline) with: \(parameters)")
+      print("request \(TwitterURLConsts.statusesUserTimeline) with: \(parameters)")
       busyIndicator.startAnimating()
       TwitterJSONRequest.tweetsFromTimeline(TwitterURLConsts.statusesUserTimeline, parameters: parameters) { (errorMessage, latestTweets) -> Void in
         if let latestTweets = latestTweets {
@@ -51,7 +51,7 @@ class UserTimelineTweetsViewController: UIViewController {
         }
         if let errorMessage = errorMessage {
           // need to alert user via mainQueue alert popover
-          println(errorMessage)
+          print(errorMessage)
         }
       }
     }
@@ -74,7 +74,7 @@ class UserTimelineTweetsViewController: UIViewController {
     }
     tableView?.reloadData()
   }
-  private func updateTextUI(#name: String?, screenName: String?, description: String?, location: String?) {
+  private func updateTextUI(name name: String?, screenName: String?, description: String?, location: String?) {
     nameLabel?.text = name
     descriptionLabel?.text = description
     locationLabel?.text = location
@@ -102,7 +102,7 @@ class UserTimelineTweetsViewController: UIViewController {
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if segue.identifier == StoryboardConsts.UserTimelineDetailSegueIdentifier, let detailVC = segue.destinationViewController as? UserTimelineTweetDetailViewController, indexPath = tableView.indexPathForSelectedRow() {
+    if segue.identifier == StoryboardConsts.UserTimelineDetailSegueIdentifier, let detailVC = segue.destinationViewController as? UserTimelineTweetDetailViewController, indexPath = tableView.indexPathForSelectedRow {
       detailVC.imagesDownloadedDelegate = self
       detailVC.tweet = tweets[indexPath.section][indexPath.row]
     }
@@ -141,7 +141,7 @@ extension UserTimelineTweetsViewController {
 
 extension UserTimelineTweetsViewController: RefreshWhenImagesDownloaded {
   func refreshUIThatUsesImage(stringURL: String) {
-    println("refreshing due to image: \(stringURL)")
+    print("refreshing due to image: \(stringURL)")
     updateUI()
   }
 }

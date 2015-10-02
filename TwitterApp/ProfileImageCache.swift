@@ -28,25 +28,26 @@ class ProfileImageCache {
   }
   
   func image(stringURL: String, size: CGSize, completionHandler: (String) -> Void) -> UIImage? {
-    if let imageURL = imageURLBiggerIsBetter(stringURL), stringBigURL = imageURL.absoluteString {
+    if let imageURL = imageURLBiggerIsBetter(stringURL) {
+      let stringBigURL = imageURL.absoluteString
       let key = stringBigURL + "\(Int(size.width))\(Int(size.height))"
       if let value = imageCache[key] {
         imageRequested[key] = nil
-        println("cached image returned: \(stringBigURL)")
+        print("cached image returned: \(stringBigURL)")
         return value
       }
       else if let requested = imageRequested[key] where requested {
-        println("image not back yet for: \(stringBigURL)")
+        print("image not back yet for: \(stringBigURL)")
         return nil
       }
       else {
-        println("download requested: \(stringBigURL)")
+        print("download requested: \(stringBigURL)")
         backgroundQueue.addOperationWithBlock { () -> Void in
           if let data = NSData(contentsOfURL: imageURL), image = UIImage(data: data) {
             // fastest way to resize an image; from nshipster.com
             // rounded corner method is my own; not sure of performance loss
             UIGraphicsBeginImageContext(size)
-            let rect = CGRect(origin: CGPoint.zeroPoint, size: size)
+            let rect = CGRect(origin: CGPoint.zero, size: size)
             let inset = size.width/8
             image.drawInRect(rect)
             let path = UIBezierPath(roundedRect: CGRectInset(rect, -inset, -inset), cornerRadius: size.width/4)
@@ -62,7 +63,7 @@ class ProfileImageCache {
           }
         }
         imageRequested[key] = true
-        println("background serial queue count: \(backgroundQueue.operationCount)")
+        print("background serial queue count: \(backgroundQueue.operationCount)")
         return nil
       }
     }
@@ -76,7 +77,7 @@ class ProfileImageCache {
       if let lastPathComponent = biggerImageURL?.lastPathComponent where lastPathComponent.hasSuffix(TwitterURLConsts.profileImageNormal) {
         biggerImageURL = biggerImageURL?.URLByDeletingLastPathComponent
         var pathComponent = lastPathComponent
-        let range = advance(pathComponent.endIndex, -count(TwitterURLConsts.profileImageNormal))..<pathComponent.endIndex
+        let range = pathComponent.endIndex.advancedBy(-TwitterURLConsts.profileImageNormal.characters.count)..<pathComponent.endIndex
         pathComponent.removeRange(range)
         pathComponent += TwitterURLConsts.profileImageBigger
         biggerImageURL = biggerImageURL?.URLByAppendingPathComponent(pathComponent)

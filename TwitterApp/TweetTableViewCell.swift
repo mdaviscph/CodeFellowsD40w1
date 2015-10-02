@@ -30,7 +30,7 @@ class TweetTableViewCell: UITableViewCell {
       updateProfileImageUI(profileImageURL, size: imageView.bounds.size)
     }
   }
-  private func updateTextUI(#name: String?, text: String?, screenName: String?, createdAt: String?) {
+  private func updateTextUI(name name: String?, text: String?, screenName: String?, createdAt: String?) {
     nameLabel?.text = name
     theTextLabel?.text = text
     if let screenName = screenName {

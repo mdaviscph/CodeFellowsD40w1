@@ -42,7 +42,7 @@ class UserTimelineTweetDetailViewController: UIViewController {
       updateProfileImageUI(profileImageURL, size: imageView.bounds.size)
     }
   }
-  private func updateTextUI(#name: String?, text: String?, screenName: String?) {
+  private func updateTextUI(name name: String?, text: String?, screenName: String?) {
     nameLabel?.text = name
     theTextLabel?.text = text
     if let screenName = screenName {
@@ -80,7 +80,7 @@ extension UserTimelineTweetDetailViewController {
 
 extension UserTimelineTweetDetailViewController: RefreshWhenImagesDownloaded {
   func refreshUIThatUsesImage(stringURL: String) {
-    println("refreshing due to image: \(stringURL)")
+    print("refreshing due to image: \(stringURL)")
     updateUI()
   }
 }

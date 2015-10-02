@@ -41,7 +41,7 @@ class HomeTimelineTweetsViewController: UIViewController {
     //  tweets.insert(latestTweets, atIndex: 0)
     //}
     
-    println("request: \(TwitterURLConsts.statusesHomeTimeline)")
+    print("request: \(TwitterURLConsts.statusesHomeTimeline)")
     busyIndicator.startAnimating()
     TwitterJSONRequest.tweetsFromTimeline(TwitterURLConsts.statusesHomeTimeline, parameters: nil) { (errorMessage, latestTweets) -> Void in
       if let latestTweets = latestTweets {
@@ -52,7 +52,7 @@ class HomeTimelineTweetsViewController: UIViewController {
       }
       if let errorMessage = errorMessage {
         // need to alert user via mainQueue alert popover
-        println(errorMessage)
+        print(errorMessage)
       }
     }
 
@@ -72,7 +72,7 @@ class HomeTimelineTweetsViewController: UIViewController {
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if segue.identifier == StoryboardConsts.HomeTimelineDetailSegueIdentifier, let detailVC = segue.destinationViewController as? HomeTimelineTweetDetailViewController, indexPath = tableView.indexPathForSelectedRow() {
+    if segue.identifier == StoryboardConsts.HomeTimelineDetailSegueIdentifier, let detailVC = segue.destinationViewController as? HomeTimelineTweetDetailViewController, indexPath = tableView.indexPathForSelectedRow {
       detailVC.imagesDownloadedDelegate = self
       detailVC.tweet = tweets[indexPath.section][indexPath.row]
     }
@@ -111,7 +111,7 @@ extension HomeTimelineTweetsViewController: UITableViewDataSource {
 
 extension HomeTimelineTweetsViewController: RefreshWhenImagesDownloaded {
   func refreshUIThatUsesImage(stringURL: String) {
-    println("refreshing due to image: \(stringURL)")
+    print("refreshing due to image: \(stringURL)")
     updateUI()
   }
 }
